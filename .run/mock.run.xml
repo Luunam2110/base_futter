@@ -1,0 +1,8 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="mock" type="FlutterRunConfigurationType" factoryName="Flutter">
+    <option name="additionalArgs" value="--dart-define=IS_MOCK=true" />
+    <option name="buildFlavor" value="develop" />
+    <option name="filePath" value="$PROJECT_DIR$/lib/main_develop.dart" />
+    <method v="2" />
+  </configuration>
+</component>

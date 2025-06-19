@@ -1,0 +1,65 @@
+# This file configures the analyzer, which statically analyzes Dart code to
+# check for errors, warnings, and lints.
+#
+# The issues identified by the analyzer are surfaced in the UI of Dart-enabled
+# IDEs (https://dart.dev/tools#ides-and-editors). The analyzer can also be
+# invoked from the command line by running `flutter analyze`.
+
+# The following line activates a set of recommended lints for Flutter apps,
+# packages, and plugins designed to encourage good coding practices.
+include: package:flutter_lints/flutter.yaml
+
+linter:
+  rules:
+    - avoid_print
+    - prefer_single_quotes
+    - annotate_overrides
+    - avoid_empty_else
+    - avoid_function_literals_in_foreach_calls
+    - avoid_relative_lib_imports
+    - avoid_renaming_method_parameters
+    - avoid_returning_null_for_void
+    - avoid_types_as_parameter_names
+    - await_only_futures
+    - camel_case_extensions
+    - camel_case_types
+    - collection_methods_unrelated_type
+    - constant_identifier_names
+    - control_flow_in_finally
+    - curly_braces_in_flow_control_structures
+    - empty_catches
+    - empty_constructor_bodies
+    - empty_statements
+    - file_names
+    - hash_and_equals
+    - implicit_call_tearoffs
+    - invalid_runtime_check_with_js_interop_types
+    - library_prefixes
+    - library_private_types_in_public_api
+    - no_leading_underscores_for_library_prefixes
+    - no_duplicate_case_values
+    - no_leading_underscores_for_local_identifiers
+    - null_check_on_nullable_type_parameter
+    - non_constant_identifier_names
+    - null_closures
+    - overridden_fields
+    - prefer_conditional_assignment
+    - prefer_collection_literals
+    - prefer_contains
+    - prefer_final_fields
+    - prefer_for_elements_to_map_fromIterable
+    - prefer_function_declarations_over_variables
+    - prefer_if_null_operators
+    - prefer_initializing_formals
+    - prefer_is_empty
+    - prefer_is_not_empty
+    - prefer_is_not_operator
+    - prefer_null_aware_operators
+    - prefer_iterable_whereType
+    - prefer_spread_collections
+    - slash_for_doc_comments
+    - provide_deprecation_message
+    - unnecessary_const
+    - unnecessary_constructor_name
+    - valid_regexps
+    - always_declare_return_types

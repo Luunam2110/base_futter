@@ -1,0 +1,22 @@
+{
+  "@@locale": "vi",
+  "hello": "Xin chào",
+  "error": "Đã xảy ra lỗi",
+  "something_went_wrong": "Đã có lỗi sảy ra. Vui lòng thử lại sau",
+  "error_network": "Vui lòng kiểm tra kết nối internet và thử lại sau",
+  "server_error": "Không thể truy cập vào máy chủ, vui lòng thử lại sau",
+  "go_to_home": "Về trang chủ",
+  "no_data": "Không có dữ liệu!",
+  "retry": "Thử lại",
+  "unauthenticated": "Phiên đăng nhập đã hết hạn, vui lòng đăng nhập lại",
+  "unauthorized": "Bạn không có quyền truy cập vào chức năng này",
+  "session_expired_message": "Phiên đăng nhập đã hết hạn, vui lòng đăng nhập lại",
+  "session_expired": "Phiên đăng nhập đã hết hạn",
+  "nice_to_see_you_again": "Rất vui được gặp lại bạn",
+  "email_or_phone_number": "Email hoặc số điện thoại",
+  "password": "Mật khẩu",
+  "enter_password": "Nhập mật khẩu",
+  "this_field_is_required": "Trường này là bắt buộc",
+  "remember_me": "Lưu tài khoản",
+  "forgot_password": "Quên mật khẩu"
+}

@@ -1,0 +1,26 @@
+global_options:
+  freezed:
+    runs_before:
+      - json_serializable
+  json_serializable:
+    runs_before:
+      - retrofit_generator
+
+targets:
+  $default:
+    builders:
+      freezed:
+        options:
+          build_extensions:
+            '^lib/{{}}.dart': 'lib/generated/{{}}.freezed.dart'
+      source_gen|combining_builder:
+        options:
+          build_extensions:
+            '^lib/{{}}.dart': 'lib/generated/{{}}.g.dart'
+      json_serializable:
+        options:
+          explicit_to_json: true
+      mockito|mockBuilder:
+        options:
+          build_extensions:
+            '^test/{{}}.dart': 'test/generated/{{}}.mocks.dart'

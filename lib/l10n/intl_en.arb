@@ -1,0 +1,22 @@
+{
+  "@@locale": "en",
+  "hello": "Hello",
+  "error": "An error occurred",
+  "something_went_wrong": "Something went wrong. Please try again later.",
+  "error_network": "Please check the internet connection and try again later.",
+  "server_error": "Can’t access to the server, please try again later.",
+  "go_to_home": "Go to Home",
+  "no_data": "No data available!",
+  "retry": "Retry",
+  "unauthenticated": "You are not authenticated, please log in again.",
+  "unauthorized": "You are not authorized",
+  "session_expired_message": "Your session has expired, please log in again.",
+  "session_expired": "Session expired",
+  "nice_to_see_you_again": "Nice to see you again",
+  "email_or_phone_number": "Email or phone number",
+  "password": "Password",
+  "enter_password": "Enter password",
+  "this_field_is_required": "This field is required",
+  "remember_me": "Remember me",
+  "forgot_password": "Forgot password"
+}
