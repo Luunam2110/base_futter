@@ -1,4 +1,4 @@
-import 'package:dafactory/core/base/base_cubit.dart' show BaseCubit;
+import 'package:dafactory/core/base_bloc/base_cubit.dart' show BaseCubit;
 import 'package:dafactory/core/result/result.dart';
 import 'package:dafactory/presentation/screens/auth/login/bloc/login_effect.dart';
 import 'package:dafactory/presentation/screens/auth/login/bloc/login_state.dart';

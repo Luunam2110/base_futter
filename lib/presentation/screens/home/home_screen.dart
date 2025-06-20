@@ -7,6 +7,7 @@ import 'package:dafactory/presentation/widgets/dialog/app_dialog.dart';
 import 'package:dafactory/presentation/widgets/toast/app_toast.dart';
 import 'package:dafactory/presentation/widgets/views/base_screen.dart';
 import 'package:dafactory/presentation/widgets/views/state_layout.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -74,6 +75,20 @@ class _HomeScreenState extends BaseViewState<HomeScreen, HomeCubit, HomeState, d
                 onPressed: () {
                   final state = AppState.current();
                   state.changeTheme(ThemeMode.system);
+                },
+              ),
+              PrimaryButton(
+                title: 'logout ',
+                onPressed: () {
+                  final state = AppState.current();
+                  state.logout();
+                },
+              ),
+
+              PrimaryButton(
+                title: 'crash ',
+                onPressed: () {
+                  FirebaseCrashlytics.instance.crash();
                 },
               ),
             ],

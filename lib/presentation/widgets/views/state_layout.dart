@@ -1,4 +1,4 @@
-import 'package:dafactory/core/base/base_state.dart';
+import 'package:dafactory/core/base_bloc/base_state.dart';
 import 'package:dafactory/core/result/app_exception.dart';
 import 'package:dafactory/presentation/widgets/views/empty_view.dart';
 import 'package:dafactory/presentation/widgets/views/error_view.dart';

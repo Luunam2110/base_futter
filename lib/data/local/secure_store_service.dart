@@ -7,11 +7,13 @@ class SecureService {
   static const _secureAccount = '_SECURE_ACCOUNT';
 
   AndroidOptions _getAndroidOptions() {
-    return AndroidOptions()..params['encryptedSharedPreferences'] = 'true';
+    return const AndroidOptions(
+      encryptedSharedPreferences: true,
+    );
   }
 
   IOSOptions _getIOSOptions() {
-    return const IOSOptions(accessibility: IOSAccessibility.first_unlock);
+    return const IOSOptions(accessibility: KeychainAccessibility.first_unlock);
   }
 
   // Create storage

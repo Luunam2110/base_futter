@@ -1,4 +1,4 @@
-import 'package:dafactory/core/base/base_cubit.dart';
+import 'package:dafactory/core/base_bloc/base_cubit.dart';
 import 'package:dafactory/presentation/screens/home/cubit/home_state.dart';
 
 class HomeCubit extends BaseCubit<HomeState, dynamic> {

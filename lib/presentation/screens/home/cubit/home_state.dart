@@ -1,4 +1,4 @@
-import 'package:dafactory/core/base/base_state.dart';
+import 'package:dafactory/core/base_bloc/base_state.dart';
 
 abstract class HomeState extends BaseState {
   const HomeState();

@@ -1,5 +1,5 @@
-import 'package:dafactory/core/base/base_cubit.dart';
-import 'package:dafactory/core/base/base_state.dart';
+import 'package:dafactory/core/base_bloc/base_cubit.dart';
+import 'package:dafactory/core/base_bloc/base_state.dart';
 import 'package:dafactory/core/utils/screen_size.dart';
 import 'package:flutter/material.dart';
 
