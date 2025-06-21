@@ -8,7 +8,7 @@ import 'package:dafactory/domain/repository/auth_repository.dart' show Authentic
 class RefreshTokenUseCase {
   final _repo = getIt<AuthenticationRepository>();
 
-  Future<Result<String>> refreshToken(String refreshToken) async {
+  Future<Result<String>> call(String refreshToken) async {
     return runCatchingAsync<BaseResponse<RefreshTokenResponse>, String>(
       () async {
         final response = await _repo.refreshToken(refreshToken);

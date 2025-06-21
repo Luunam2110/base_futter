@@ -1,15 +1,19 @@
 import 'dart:ui' show Locale;
 
-import 'package:dafactory/app/app_usecase.dart' show AppUseCase;
 import 'package:dafactory/core/router/app_router.dart' show AppRouter;
+import 'package:dafactory/domain/usecase/auth/get_auth_status_usecase.dart';
+import 'package:dafactory/domain/usecase/locate/load_locale_usecase.dart';
+import 'package:dafactory/domain/usecase/theme/save_theme_mode_usecase.dart';
 import 'package:flutter/foundation.dart' show ChangeNotifier;
 import 'package:flutter/material.dart' show ThemeMode;
 import 'package:flutter/widgets.dart' show BuildContext;
 import 'package:provider/provider.dart';
 
+import '../domain/usecase/locate/save_locale_usecase.dart' show SaveLocaleUseCase;
+import '../domain/usecase/theme/load_theme_mode_usecase.dart' show LoadThemeModeUseCase;
+
 class AppState extends ChangeNotifier {
   AppState() {
-    useCase = AppUseCase();
     initState();
   }
 
@@ -18,7 +22,12 @@ class AppState extends ChangeNotifier {
     return realContext.read<AppState>();
   }
 
-  late final AppUseCase useCase;
+  final getAuthStatus = GetAuthStatusUseCase();
+  final loadLocale = LoadLocaleUseCase();
+  final loadTheme = LoadThemeModeUseCase();
+  final saveLocale = SaveLocaleUseCase();
+  final saveTheme = SaveThemeModeUseCase();
+
   bool _isLoggedIn = false;
   Locale _locale = const Locale('en');
   ThemeMode _themeMode = ThemeMode.system;
@@ -30,21 +39,21 @@ class AppState extends ChangeNotifier {
   ThemeMode get themeMode => _themeMode;
 
   void initState() {
-    _isLoggedIn = useCase.getAuthStatus().getOrElse(false);
-    _locale = useCase.loadLocale();
-    _themeMode = useCase.loadTheme();
+    _isLoggedIn = getAuthStatus().getOrElse(false);
+    _locale = loadLocale();
+    _themeMode = loadTheme();
     notifyListeners();
   }
 
   void changeLocale(Locale newMode) {
     _locale = newMode;
-    useCase.saveLocale(newMode);
+    saveLocale(newMode);
     notifyListeners();
   }
 
   void changeTheme(ThemeMode newMode) {
     _themeMode = newMode;
-    useCase.saveTheme(newMode);
+    saveTheme(newMode);
     notifyListeners();
   }
 

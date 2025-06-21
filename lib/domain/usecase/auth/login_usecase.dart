@@ -7,10 +7,10 @@ import 'package:dafactory/domain/repository/auth_repository.dart' show Authentic
 
 import '../../../data/request/auth/sign_in_request.dart';
 
-mixin LoginUseCase {
+class LoginUseCase {
   AuthenticationRepository get _repo => getIt<AuthenticationRepository>();
 
-  Future<Result> login(String userName, String password, bool saveAccount) async {
+  Future<Result> call(String userName, String password, bool saveAccount) async {
     final loginResult = await runCatchingAsync<BaseResponse<SignInResponse>, UnAuthorizedModel>(
       () => _repo.login(LoginRequest(userName, password)),
       (res) => res.data?.toModel() ?? UnAuthorizedModel('', ''),

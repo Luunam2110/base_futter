@@ -4,13 +4,11 @@ import 'package:dafactory/core/result/result.dart' show runCatching;
 import 'package:dafactory/domain/repository/locale_repository.dart' show LocaleRepository;
 import 'package:flutter/material.dart';
 
-mixin LoadLocaleUseCase {
+class LoadLocaleUseCase {
   LocaleRepository get _repo => getIt<LocaleRepository>();
 
-  Locale loadLocale() => runCatching<String, Locale>(
+  Locale call() => runCatching<String, Locale>(
         _repo.loadLocale,
         (mode) => mode.toLocate(),
       ).getOrElse(const Locale('en'));
 }
-
-class LoadLocaleUseCaseImpl with LoadLocaleUseCase {}

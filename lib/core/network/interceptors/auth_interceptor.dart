@@ -14,6 +14,9 @@ class AuthInterceptor extends Interceptor {
   final List<Completer<String>> _waitQueue = [];
   bool _isRefreshing = false;
 
+  final _getRefreshToken = GetRefreshTokenUseCase();
+  final _refreshToken = RefreshTokenUseCase();
+
   @override
   Future<void> onError(
     DioException err,
@@ -25,9 +28,8 @@ class AuthInterceptor extends Interceptor {
       _waitQueue.add(completer);
       if (!_isRefreshing) {
         _isRefreshing = true;
-        final refreshToken = GetRefreshTokenUseCaseImpl().getRefreshToken().getOrElse('');
-        final newToken =
-            refreshToken.isEmpty ? '' : (await RefreshTokenUseCase().refreshToken(refreshToken)).getOrElse('');
+        final refreshToken = _getRefreshToken().getOrElse('');
+        final newToken = refreshToken.isEmpty ? '' : (await _refreshToken(refreshToken)).getOrElse('');
         _isRefreshing = false;
         for (final request in _waitQueue) {
           request.complete(newToken);
