@@ -6,6 +6,8 @@ import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart' as foundation show kDebugMode;
 import 'package:pretty_dio_logger/pretty_dio_logger.dart' show PrettyDioLogger;
 
+import 'interceptors/network_intercepter.dart';
+
 class DioClient {
   static Dio? _instance;
 
@@ -26,6 +28,7 @@ class DioClient {
     dio.interceptors.addAll([
       // Add your interceptors here
       RequestInterceptor(),
+      NetworkInterceptor(),
       AuthInterceptor(),
     ]);
     if (foundation.kDebugMode) {

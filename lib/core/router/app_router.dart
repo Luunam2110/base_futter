@@ -1,5 +1,6 @@
 import 'package:collection/collection.dart';
 import 'package:dafactory/app/app_state.dart' show AppState;
+import 'package:dafactory/core/router/router_observer.dart';
 import 'package:dafactory/presentation/screens/auth/login/login_screen.dart';
 import 'package:dafactory/presentation/screens/common/not_found_screen.dart';
 import 'package:dafactory/presentation/screens/home/home_screen.dart';
@@ -17,6 +18,9 @@ class AppRouter {
 
   static GoRouter createRouter(AppState appState) {
     return GoRouter(
+      observers: [
+        GoRouterObserver(),
+      ],
       navigatorKey: _navigatorKey,
       initialLocation: appState.isLoggedIn ? home : login,
       refreshListenable: appState,

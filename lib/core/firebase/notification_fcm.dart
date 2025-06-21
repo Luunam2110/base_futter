@@ -67,15 +67,14 @@ class NotificationsManager {
     // Get FCM token
     try {
       final token = await _messaging.getToken();
-      logger.d('FCM Token: $token');
+      AppLogger.prettyLogger.i('FCM Token: $token');
     } catch (e) {
-      logger.e(e);
+      AppLogger.prettyLogger.e(e);
     }
   }
 
   Future<void> showNotification(RemoteMessage message) async {
     RemoteNotification? notification = message.notification;
-    logger.d(notification);
     if (!kIsWeb && notification != null) {
       await _localNotifications.show(
         notification.hashCode,
@@ -108,7 +107,7 @@ class NotificationsManager {
       carPlay: false,
       criticalAlert: false,
     );
-    logger.d('User granted permission: ${settings.authorizationStatus}');
+    AppLogger.prettyLogger.i('[NOTIFICATION] User granted permission: ${settings.authorizationStatus}');
     return settings.authorizationStatus == AuthorizationStatus.authorized ||
         settings.authorizationStatus == AuthorizationStatus.provisional;
   }
@@ -116,7 +115,7 @@ class NotificationsManager {
   Future<void> _setupMessageHandlers() async {
     FirebaseMessaging.onMessage.listen((message) {
       // todo update UI show badge or something
-      AppToast.showInfo(title:message.notification?.title, message: message.notification?.body);
+      AppToast.showInfo(title: message.notification?.title, message: message.notification?.body);
       // showNotification(message);
     });
     FirebaseMessaging.onMessageOpenedApp.listen(_handleForegroundMessage);
@@ -127,12 +126,12 @@ class NotificationsManager {
   }
 
   void _handleForegroundMessage(RemoteMessage message) {
-    logger.d('Handling a foreground message: ${message.messageId}');
+    AppLogger.logger('[NOTIFICATION] Handling a foreground message: ${message.messageId}', ['NOTIFICATION']);
     //todo open screen with message
   }
 
   void _handleSelectNotificationBackground(NotificationResponse? message) {
-    logger.d('Handling a background message: ${message?.payload}');
+    AppLogger.logger('Handling a background message: ${message?.payload}', ['NOTIFICATION']);
     // todo open screen with message
   }
 }

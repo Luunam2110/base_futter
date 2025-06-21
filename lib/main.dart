@@ -26,7 +26,7 @@ Future<void> mainApp() async {
       final widgetBinding = WidgetsFlutterBinding.ensureInitialized();
       FlutterNativeSplash.preserve(widgetsBinding: widgetBinding);
       await Firebase.initializeApp(options: kIsWeb ? AppConfig.instance.firebaseConfig.option : null);
-      logger.d('Start initialization app');
+      AppLogger.logger('Start initialization app');
       FlutterError.onError = (e) {
         FirebaseCrashlytics.instance.recordFlutterFatalError(e);
       };
@@ -35,7 +35,7 @@ Future<void> mainApp() async {
       Bloc.observer = MyBlocObserver();
       await NotificationsManager.instance.initialize();
       FlutterNativeSplash.remove();
-      logger.d('End initialization app');
+      AppLogger.logger('End initialization app');
       runApp(ChangeNotifierProvider(create: (_) => AppState(), child: const MyApp()));
     },
     (e, s) {

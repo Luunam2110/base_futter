@@ -2,7 +2,7 @@ import 'package:dafactory/core/network/network_handler.dart' show NetworkHandler
 import 'package:dafactory/core/result/app_exception.dart' show AppException, CommonException;
 import 'package:dio/dio.dart' show DioException;
 
-import '../utils/logger.dart' show logger;
+import '../utils/logger.dart' show AppLogger;
 
 /// Utility class that simplifies handling errors.
 ///
@@ -54,7 +54,7 @@ Result<E> runCatching<T, E>(T Function() block, E Function(T) map) {
     final data = block();
     return Result.success(map(data));
   } catch (e) {
-    logger.e(e);
+    AppLogger.prettyLogger.e(e);
     return Result.error(CommonException());
   }
 }
@@ -64,7 +64,7 @@ Future<Result<E>> runCatchingAsync<T, E>(Future<T> Function() block, E Function(
     final response = await block();
     return Result.success(map(response));
   } catch (e) {
-    logger.e(e);
+    AppLogger.prettyLogger.e(e);
     if (e is DioException) {
       return Result.error(NetworkHandler.handleError(e));
     } else {

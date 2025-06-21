@@ -123,13 +123,14 @@ class AppToast {
           dragToClose: true,
           applyBlurEffect: !realContext.isDarkMode,
           callbacks: ToastificationCallbacks(
-            onTap: (toastItem) => logger.d('Toast ${toastItem.id} tapped'),
+            onTap: (toastItem) => AppLogger.logger('${toastItem.id} tapped', ['TOAST']),
             onCloseButtonTap: (toastItem) {
-              logger.d('Toast ${toastItem.id} close button tapped');
+              AppLogger.logger('${toastItem.id} close button tapped', ['TOAST']);
               toastification.dismissById(toastItem.id);
             },
-            onAutoCompleteCompleted: (toastItem) => logger.d('Toast ${toastItem.id} auto complete completed'),
-            onDismissed: (toastItem) => logger.d('Toast ${toastItem.id} dismissed'),
+            onAutoCompleteCompleted: (toastItem) =>
+                AppLogger.logger('${toastItem.id} auto complete completed', ['TOAST']),
+            onDismissed: (toastItem) => AppLogger.logger('[TOAST] ${toastItem.id} dismissed', ['TOAST']),
           ),
         )
         .id;
