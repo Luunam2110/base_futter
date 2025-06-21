@@ -3,7 +3,7 @@ import 'package:dafactory/core/env/app_config.dart';
 import 'package:dafactory/core/network/interceptors/auth_interceptor.dart' show AuthInterceptor;
 import 'package:dafactory/core/network/interceptors/request_interceptor.dart' show RequestInterceptor;
 import 'package:dio/dio.dart';
-import 'package:flutter/foundation.dart' as Foundation show kDebugMode;
+import 'package:flutter/foundation.dart' as foundation show kDebugMode;
 import 'package:pretty_dio_logger/pretty_dio_logger.dart' show PrettyDioLogger;
 
 class DioClient {
@@ -28,7 +28,7 @@ class DioClient {
       RequestInterceptor(),
       AuthInterceptor(),
     ]);
-    if (Foundation.kDebugMode) {
+    if (foundation.kDebugMode) {
       dio.interceptors.add(
         PrettyDioLogger(
           requestHeader: true,

@@ -2,7 +2,6 @@ import 'package:dafactory/core/di/module.dart';
 import 'package:dafactory/core/result/result.dart';
 import 'package:dafactory/data/request/auth/sign_in_request.dart';
 import 'package:dafactory/domain/model/auth/account_model.dart';
-import 'package:dafactory/domain/model/auth/unauthorized_model.dart';
 import 'package:dafactory/domain/repository/auth_repository.dart';
 
 mixin GetSavedAccountUseCase {

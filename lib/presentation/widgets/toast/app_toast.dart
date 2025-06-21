@@ -1,7 +1,6 @@
 import 'package:dafactory/core/constants/size_constants.dart';
 import 'package:dafactory/core/extensions/theme_ext.dart';
 import 'package:dafactory/core/router/app_router.dart';
-import 'package:dafactory/core/themes/app_color.dart';
 import 'package:dafactory/core/utils/logger.dart';
 import 'package:dafactory/core/utils/screen_size.dart';
 import 'package:flutter/material.dart';

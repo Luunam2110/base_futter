@@ -50,7 +50,7 @@ class _HomeScreenState extends BaseViewState<HomeScreen, HomeCubit, HomeState, d
                 onPressed: () {
                   AppDialog.showAppDialog(
                     title: 'Success',
-                    builder: (BuildContext context) => Text('asfasf'),
+                    builder: (BuildContext context) => const Text('asfasf'),
                     primaryButtonText: 'OK',
                     secondaryButtonText: 'Cancel',
                   );
