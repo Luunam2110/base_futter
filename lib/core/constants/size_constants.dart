@@ -105,9 +105,15 @@ class SizeConstants {
   static const fieldHeight = 48.0;
 
 
+  static const space4 = 4.0;
   static const space8 = 8.0;
   static const space16 = 16.0;
   static const space24 = 24.0;
   static const space36 = 36.0;
   static const space48 = 48.0;
+  static const space56 = 56.0;
+  static const space60 = 60.0;
+  static const space64 = 64.0;
+  static const space96 = 96.0;
+  static const space128 = 128.0;
 }

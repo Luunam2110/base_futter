@@ -35,12 +35,6 @@ abstract class BaseViewState<T extends StatefulWidget, C extends BaseCubit<S, E>
 
   /// Override to provide the Cubit instance.
   C createCubit();
-
-  @override
-  void dispose() {
-    cubit.close();
-    super.dispose();
-  }
 }
 
 /// Base class for stateless widgets using a Cubit for state management and effects.

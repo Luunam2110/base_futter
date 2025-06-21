@@ -23,14 +23,12 @@ class PrimaryButton extends StatefulWidget {
 class _PrimaryButtonState extends State<PrimaryButton> {
   @override
   Widget build(BuildContext context) {
-    return ConstrainedBox(
+    return Container(
+      width: widget.width,
       constraints: const BoxConstraints(minHeight: SizeConstants.fieldHeight),
-      child: Ink(
-        decoration: BoxDecoration(
-          color: context.appColors.primaryColor,
-          borderRadius: BorderRadius.circular(SizeConstants.defaultBorderRadius),
-        ),
-        width: widget.width,
+      child: Material(
+        color: context.appColors.primaryColor,
+        borderRadius: BorderRadius.circular(SizeConstants.defaultBorderRadius),
         child: InkWell(
           borderRadius: BorderRadius.circular(SizeConstants.defaultBorderRadius),
           splashColor: context.appColors.splashColor,

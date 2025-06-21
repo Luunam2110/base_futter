@@ -69,7 +69,8 @@ class _LoginScreenState extends BaseViewState<LoginScreen, LoginCubit, LoginStat
     return Scaffold(
       backgroundColor: context.appColors.background,
       body: SafeArea(
-        top: true,
+        left: false,
+        right: false,
         child: StateLayout<LoginCubit>(
             bloc: cubit,
             child: Padding(

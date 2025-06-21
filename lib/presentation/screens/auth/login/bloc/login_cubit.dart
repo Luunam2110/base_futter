@@ -10,8 +10,7 @@ class LoginCubit extends BaseCubit<LoginState, LoginEffect> {
     initState();
   }
 
-  // Usecase
-
+  // UseCase
   final _getSavedAccount = GetSavedAccountUseCase();
   final _login = LoginUseCase();
 
@@ -19,11 +18,13 @@ class LoginCubit extends BaseCubit<LoginState, LoginEffect> {
 
   Future<void> initState() async {
     final savedAccount = await _getSavedAccount();
-    emit(LoginLoadedState(
-      isSaveAccount: savedAccount != null && savedAccount.email.isNotEmpty && savedAccount.password.isNotEmpty,
-      email: savedAccount?.email ?? '',
-      password: savedAccount?.password ?? '',
-    ));
+    emit(
+      LoginLoadedState(
+        isSaveAccount: savedAccount != null && savedAccount.email.isNotEmpty && savedAccount.password.isNotEmpty,
+        email: savedAccount?.email ?? '',
+        password: savedAccount?.password ?? '',
+      ),
+    );
   }
 
   void toggleSaveAccount(bool value) {
