@@ -11,11 +11,11 @@ mixin LoginUseCase {
   AuthenticationRepository get _repo => getIt<AuthenticationRepository>();
 
   Future<Result> login(String userName, String password, bool saveAccount) async {
-    final loginResult = await runCatchingAsync<BaseResponse<SignInResponse>, UnauthorizedModel>(
+    final loginResult = await runCatchingAsync<BaseResponse<SignInResponse>, UnAuthorizedModel>(
       () => _repo.login(LoginRequest(userName, password)),
-      (res) => res.data?.toModel() ?? UnauthorizedModel('', ''),
+      (res) => res.data?.toModel() ?? UnAuthorizedModel('', ''),
     );
-    if (loginResult is Success<UnauthorizedModel> && loginResult.value.accessToken.isNotEmpty) {
+    if (loginResult is Success<UnAuthorizedModel> && loginResult.value.accessToken.isNotEmpty) {
       _repo.saveAuthInfo(
         token: loginResult.value.accessToken,
         refreshToken: loginResult.value.refreshToken,

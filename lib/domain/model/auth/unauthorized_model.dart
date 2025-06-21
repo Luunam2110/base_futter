@@ -1,6 +1,6 @@
-class UnauthorizedModel{
+class UnAuthorizedModel{
   final String accessToken;
   final String refreshToken;
 
-  UnauthorizedModel(this.accessToken, this.refreshToken);
+  UnAuthorizedModel(this.accessToken, this.refreshToken);
 }

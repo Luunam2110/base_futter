@@ -15,7 +15,7 @@ class SignInResponse {
 
   factory SignInResponse.fromJson(Map<String, dynamic> json) => _$SignInResponseFromJson(json);
 
-  UnauthorizedModel toModel() {
-    return UnauthorizedModel(accessToken, refreshToken);
+  UnAuthorizedModel toModel() {
+    return UnAuthorizedModel(accessToken, refreshToken);
   }
 }
