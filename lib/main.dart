@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'package:dafactory/app/app_state.dart';
 import 'package:dafactory/app/application.dart';
 import 'package:dafactory/core/di/module.dart' show configureDependencies;
 import 'package:dafactory/core/env/app_config.dart';
@@ -10,15 +9,10 @@ import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:provider/provider.dart' show ChangeNotifierProvider;
 import 'package:url_strategy/url_strategy.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 
 import 'core/base_bloc/bloc_observer.dart';
-
-Future<void> main() async {
-  await mainApp();
-}
 
 Future<void> mainApp() async {
   await runZonedGuarded(
@@ -28,7 +22,7 @@ Future<void> mainApp() async {
       await Firebase.initializeApp(options: kIsWeb ? AppConfig.instance.firebaseConfig.option : null);
       AppLogger.logger('Start initialization app');
       FlutterError.onError = (e) {
-        FirebaseCrashlytics.instance.recordFlutterFatalError(e);
+        if (!kIsWeb) FirebaseCrashlytics.instance.recordFlutterFatalError(e);
       };
       setPathUrlStrategy();
       await configureDependencies();
@@ -36,10 +30,10 @@ Future<void> mainApp() async {
       await NotificationsManager.instance.initialize();
       FlutterNativeSplash.remove();
       AppLogger.logger('End initialization app');
-      runApp(ChangeNotifierProvider(create: (_) => AppState(), child: const MyApp()));
+      runApp(const MyApp());
     },
     (e, s) {
-      FirebaseCrashlytics.instance.recordError(e, s);
+      if (!kIsWeb) FirebaseCrashlytics.instance.recordError(e, s);
     },
   );
 }

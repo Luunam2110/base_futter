@@ -1,14 +1,23 @@
 import 'package:dafactory/core/constants/size_constants.dart';
 import 'package:dafactory/core/extensions/theme_ext.dart';
+import 'package:dafactory/core/router/app_router.dart';
 import 'package:dafactory/presentation/screens/main/home/home_screen.dart';
 import 'package:dafactory/presentation/screens/main/setting/setting_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:go_router/go_router.dart';
 
 class MobileNavigatorBar extends StatefulWidget {
-  const MobileNavigatorBar({super.key, this.initIndex});
+  const MobileNavigatorBar({
+    super.key,
+    this.initIndex,
+    required this.child,
+    required this.showNavigator,
+  });
 
   final int? initIndex;
+  final Widget child;
+  final bool showNavigator;
 
   @override
   State<MobileNavigatorBar> createState() => _MobileNavigatorBarState();
@@ -16,17 +25,21 @@ class MobileNavigatorBar extends StatefulWidget {
 
 class _MobileNavigatorBarState extends State<MobileNavigatorBar> {
   int currentIndex = 0;
-
-  List<Widget> _children = [];
+  bool showNavigator = true;
 
   @override
   void initState() {
+    showNavigator = widget.showNavigator;
     currentIndex = widget.initIndex ?? 0;
-    _children = [
-      currentIndex == 0 ? const HomeScreen() : const SizedBox(),
-      currentIndex == 1 ? const SettingScreen() : const SizedBox(),
-    ];
     super.initState();
+  }
+
+  @override
+  void didUpdateWidget(covariant MobileNavigatorBar oldWidget) {
+    if (widget.showNavigator != oldWidget.showNavigator) {
+      setState(() => showNavigator = widget.showNavigator);
+    }
+    super.didUpdateWidget(oldWidget);
   }
 
   Widget getChildFormIndex(int index) {
@@ -41,10 +54,10 @@ class _MobileNavigatorBarState extends State<MobileNavigatorBar> {
   }
 
   void selectedIndex(int index) {
-    if (_children[index] is SizedBox) {
-      _children[index] = getChildFormIndex(index);
-    }
     setState(() => currentIndex = index);
+    context.go(
+      index == 0 ? AppRouter.home : AppRouter.setting,
+    );
   }
 
   @override
@@ -55,74 +68,72 @@ class _MobileNavigatorBarState extends State<MobileNavigatorBar> {
       body: Column(
         children: [
           Expanded(
-            child: IndexedStack(
-              index: currentIndex,
-              children: _children,
-            ),
+            child: widget.child,
           ),
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 4),
-            decoration: BoxDecoration(
-              color: context.appColors.background,
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black.withAlpha((0.2 * 255).round()),
-                  blurRadius: 1,
-                  spreadRadius: 1,
-                  offset: const Offset(0, 0),
+          if (showNavigator)
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 4),
+              decoration: BoxDecoration(
+                color: context.appColors.background,
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withAlpha((0.2 * 255).round()),
+                    blurRadius: 1,
+                    spreadRadius: 1,
+                    offset: const Offset(0, 0),
+                  ),
+                ],
+                borderRadius: const BorderRadius.only(
+                  topLeft: Radius.circular(2),
+                  topRight: Radius.circular(2),
                 ),
-              ],
-              borderRadius: const BorderRadius.only(
-                topLeft: Radius.circular(2),
-                topRight: Radius.circular(2),
               ),
-            ),
-            child: Padding(
-              padding: const EdgeInsets.only(bottom: 16),
-              child: SizedBox(
-                height: SizeConstants.space56,
-                child: Stack(
-                  children: [
-                    AnimatedPositioned(
-                      bottom: 0,
-                      left: width / 2 * currentIndex + (gap * currentIndex),
-                      width: width / 2,
-                      top: 0,
-                      duration: const Duration(milliseconds: 100),
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
-                        child: Container(
-                          decoration: BoxDecoration(
-                            color: context.appColors.primaryColor,
-                            borderRadius: BorderRadius.circular(100),
+              child: Padding(
+                padding: const EdgeInsets.only(bottom: 16),
+                child: SizedBox(
+                  height: SizeConstants.space56,
+                  child: Stack(
+                    children: [
+                      AnimatedPositioned(
+                        bottom: 0,
+                        left: width / 2 * currentIndex + (gap * currentIndex),
+                        width: width / 2,
+                        top: 0,
+                        duration: const Duration(milliseconds: 100),
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+                          child: Container(
+                            decoration: BoxDecoration(
+                              color: context.appColors.primaryColor,
+                              borderRadius: BorderRadius.circular(100),
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                    Row(
-                      children: [
-                        Expanded(
-                          child: NavigatorItem(
-                            onPressed: () => selectedIndex(0),
-                            isActive: currentIndex == 0,
-                            icon: const Icon(Icons.home),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: NavigatorItem(
+                              onPressed: () => selectedIndex(0),
+                              isActive: currentIndex == 0,
+                              icon: const Icon(Icons.home),
+                            ),
                           ),
-                        ),
-                        const Gap(gap),
-                        Expanded(
-                          child: NavigatorItem(
-                            onPressed: () => selectedIndex(1),
-                            isActive: currentIndex == 1,
-                            icon: const Icon(Icons.settings),
+                          const Gap(gap),
+                          Expanded(
+                            child: NavigatorItem(
+                              onPressed: () => selectedIndex(1),
+                              isActive: currentIndex == 1,
+                              icon: const Icon(Icons.settings),
+                            ),
                           ),
-                        ),
-                      ],
-                    ),
-                  ],
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
-          ),
         ],
       ),
     );

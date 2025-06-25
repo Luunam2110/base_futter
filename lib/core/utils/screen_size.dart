@@ -1,3 +1,4 @@
+import 'package:dafactory/app/app_state.dart';
 import 'package:flutter/material.dart';
 
 class ScreenSize {
@@ -7,8 +8,13 @@ class ScreenSize {
 
   static double get height => size.height;
 
-  static void init(BuildContext context) {
+  static DeviceType init(BuildContext context) {
     size = MediaQuery.of(context).size;
+    return ScreenSize.isMobile
+        ? DeviceType.mobile
+        : ScreenSize.isTablet
+            ? DeviceType.tablet
+            : DeviceType.desktop;
   }
 
   static bool get isMobile => width < 600;

@@ -9,6 +9,7 @@ import 'package:dafactory/presentation/widgets/toast/app_toast.dart';
 import 'package:dafactory/presentation/widgets/views/base_screen.dart';
 import 'package:dafactory/presentation/widgets/views/state_layout.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -20,7 +21,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends BaseViewState<HomeScreen, HomeCubit, HomeState, dynamic> {
   @override
   HomeCubit createCubit() {
-    return HomeCubit();
+    return context.read<HomeCubit>();
   }
 
   @override

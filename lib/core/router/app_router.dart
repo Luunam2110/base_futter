@@ -1,13 +1,14 @@
 import 'package:collection/collection.dart';
 import 'package:dafactory/app/app_state.dart' show AppState;
+import 'package:dafactory/core/extensions/theme_ext.dart';
 import 'package:dafactory/core/router/router_observer.dart';
 import 'package:dafactory/core/utils/screen_size.dart';
 import 'package:dafactory/presentation/screens/auth/login/login_screen.dart';
 import 'package:dafactory/presentation/screens/common/not_found_screen.dart';
 import 'package:dafactory/presentation/screens/main/home/home_screen.dart';
-import 'package:dafactory/presentation/screens/main/main_screen.dart';
-import 'package:dafactory/presentation/screens/main/navigator/navigator_screen.dart';
+import 'package:dafactory/presentation/screens/main/main/main_screen.dart';
 import 'package:dafactory/presentation/screens/main/setting/setting_screen.dart';
+import 'package:dafactory/presentation/widgets/button/secondary_button.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -19,6 +20,7 @@ class AppRouter {
   static const String home = '/home';
   static const String setting = '/setting';
   static const String login = '/login';
+  static const String example = '/example';
 
   static GoRouter createRouter(AppState appState) {
     return GoRouter(
@@ -29,7 +31,8 @@ class AppRouter {
       initialLocation: appState.isLoggedIn ? home : login,
       refreshListenable: appState,
       routes: [
-        if (!appState.isLoggedIn) ..._loginRoutes else ..._mainRoutes,
+        ..._loginRoutes,
+        ..._mainRoutes(appState),
       ],
       redirect: (context, state) {
         final loggingIn =
@@ -56,39 +59,42 @@ class AppRouter {
     ),
   ];
 
-  static final _mainRoutes = <RouteBase>[
-    ShellRoute(
-      redirect: (_, state) {
-        if (ScreenSize.isMobile) {
-          switch (state.path) {
-            case setting:
-              return Uri(path: home, queryParameters: {'initPage': 'setting'}).toString();
-          }
-        }
-        return null;
-      },
-      routes: [
-        if (ScreenSize.isMobile) ...[
+  static List<RouteBase> _mainRoutes(AppState appState) {
+    return [
+      ShellRoute(
+        routes: [
           GoRoute(
             path: home,
-            // contain home and setting
-            builder: (c, s) => NavigatorScreen.mobile(),
-          ),
-        ] else ...[
-          GoRoute(
-            path: home,
-            builder: (c, s) => const HomeScreen(),
+            pageBuilder: (c, s) {
+              return const NoTransitionPage(child: HomeScreen());
+            },
           ),
           GoRoute(
             path: setting,
-            builder: (c, s) => const SettingScreen(),
+            pageBuilder: (c, s) {
+              return const NoTransitionPage(child: SettingScreen());
+            },
           ),
-        ]
-      ],
-      builder: (_, state, child) {
-        // Navigation drawer if is desktop and crate bloc provider
-        return MainScreen(child);
-      },
-    ),
-  ];
+          GoRoute(
+            path: example,
+            pageBuilder: (c, s) {
+              final child = Builder(
+                builder: (context) {
+                  return Scaffold(
+                    backgroundColor: context.appColors.background,
+                    body: Center(child: SecondaryButton(title: 'back', onPressed: context.pop)),
+                  );
+                }
+              );
+              if(!ScreenSize.isDesktop) return MaterialPage(child: child);
+              return NoTransitionPage(child: child);
+            },
+          ),
+        ],
+        builder: (_, state, child) {
+          return MainScreen(child, path: state.uri.path);
+        },
+      ),
+    ];
+  }
 }

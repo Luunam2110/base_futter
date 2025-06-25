@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:flutter/foundation.dart' as foundation show debugPrint, kDebugMode;
+import 'package:flutter/foundation.dart' as foundation show debugPrint, kDebugMode, kIsWeb;
 import 'package:logger/logger.dart' show Logger, PrettyPrinter;
 
 class AppLogger {
@@ -12,8 +12,8 @@ class AppLogger {
   static final prettyLogger = Logger(
     printer: foundation.kDebugMode
         ? PrettyPrinter(
-            colors: Platform.isAndroid,
-            printEmojis: Platform.isAndroid,
+            colors: !foundation.kIsWeb && Platform.isAndroid,
+            printEmojis: !foundation.kIsWeb && Platform.isAndroid,
           )
         : null,
     output: null,
@@ -21,6 +21,7 @@ class AppLogger {
 
   static void logger(String message, [List<String> tags = const ['default']]) {
     final prefix = tags.map((e) => '[${e.toUpperCase()}]').join();
-    foundation.debugPrint('${Platform.isAndroid ? _gray : ''}$prefix${Platform.isAndroid ? _reset : ''} $message');
+    foundation.debugPrint(
+        '${!foundation.kIsWeb && Platform.isAndroid ? _gray : ''}$prefix${!foundation.kIsWeb && Platform.isAndroid ? _reset : ''} $message');
   }
 }

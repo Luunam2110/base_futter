@@ -7,7 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 abstract class BaseCubit<S extends BaseState, E> extends BlocBase<S> {
   BaseCubit(super.initialState);
 
-  final _effectController = StreamController<E>();
+  final _effectController = StreamController<E>.broadcast();
 
   Stream<E> get effects => _effectController.stream;
 

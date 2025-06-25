@@ -31,12 +31,15 @@ class AppState extends ChangeNotifier {
   bool _isLoggedIn = false;
   Locale _locale = const Locale('en');
   ThemeMode _themeMode = ThemeMode.system;
+  DeviceType _deviceType = DeviceType.mobile;
 
   bool get isLoggedIn => _isLoggedIn;
 
   Locale get locale => _locale;
 
   ThemeMode get themeMode => _themeMode;
+
+  DeviceType get deviceType => _deviceType;
 
   void initState() {
     _isLoggedIn = getAuthStatus().getOrElse(false);
@@ -45,13 +48,21 @@ class AppState extends ChangeNotifier {
     notifyListeners();
   }
 
+  void setDeviceType(DeviceType deviceType) {
+    if(_deviceType == deviceType) return;
+    _deviceType = deviceType;
+    notifyListeners();
+  }
+
   void changeLocale(Locale newMode) {
+    if(_locale == newMode) return;
     _locale = newMode;
     saveLocale(newMode);
     notifyListeners();
   }
 
   void changeTheme(ThemeMode newMode) {
+    if(_themeMode == newMode) return;
     _themeMode = newMode;
     saveTheme(newMode);
     notifyListeners();
@@ -67,3 +78,5 @@ class AppState extends ChangeNotifier {
     notifyListeners();
   }
 }
+
+enum DeviceType {mobile, tablet, desktop}
