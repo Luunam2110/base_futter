@@ -4,8 +4,8 @@ import 'package:dafactory/domain/usecase/locate/load_locale_usecase.dart' show L
 import 'package:dio/dio.dart';
 
 class RequestInterceptor extends Interceptor {
-  final getLocale = LoadLocaleUseCase();
-  final getAccessToken = GetAccessTokenUseCase();
+  late final getLocale = LoadLocaleUseCase();
+  late final getAccessToken = GetAccessTokenUseCase();
 
   @override
   Future<void> onRequest(

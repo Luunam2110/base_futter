@@ -14,8 +14,8 @@ class AuthInterceptor extends Interceptor {
   final List<Completer<String>> _waitQueue = [];
   bool _isRefreshing = false;
 
-  final _getRefreshToken = GetRefreshTokenUseCase();
-  final _refreshToken = RefreshTokenUseCase();
+  late final _getRefreshToken = GetRefreshTokenUseCase();
+  late final _refreshToken = RefreshTokenUseCase();
 
   @override
   Future<void> onError(
